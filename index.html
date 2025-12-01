@@ -2,255 +2,246 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Navidad Bicos de Fío (Final)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiempo Meira - 4K Full Width</title>
     <style> * { box-sizing: border-box; margin: 0; padding: 0; } </style>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;900&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;800&display=swap" rel="stylesheet">
 
     <style>
         body {
-            width: 2160px; height: 3840px; overflow: hidden;
-            background-color: #fff; color: #000;
-            font-family: 'Inter', sans-serif;
-            display: flex; flex-direction: column;
-            justify-content: space-between;
-            padding: 50px 60px;
-            /* Fondo muy sutil */
-            background-image: radial-gradient(circle at 50% 10%, #fffbf2 0%, #ffffff 80%);
+            /* EL FONDO OCUPA SIEMPRE EL 100% DE LA PANTALLA */
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #000;
+            margin: 0;
+            
+            /* IMAGEN DE FONDO */
+            background-image: url('fondo.jpg');
+            background-repeat: no-repeat;
+            /* 'cover' asegura que llene todo sin deformarse ni dejar huecos */
+            background-size: cover; 
+            background-position: center bottom;
         }
 
-        /* --- 1. HEADER --- */
-        .header-zone {
-            height: 120px;
-            display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 2px solid #000;
-            margin-bottom: 40px;
+        .overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.9) 100%);
+            z-index: 0;
+        }
+
+        /* --- CONTENEDOR ESCALABLE --- */
+        /* Aquí está la magia: Diseñamos en 1080p y lo estiramos */
+        #scaler {
+            width: 1080px;
+            height: 1920px;
+            
+            /* Esta fórmula calcula cuánto debe crecer para llenar tu pantalla */
+            transform: scale(calc(100vw / 1080));
+            transform-origin: top left;
+            
             position: relative;
-            z-index: 2;
-        }
-        
-        /* --- GUIRNALDA ESQUINA (Ajustada para la foto de las bolas) --- */
-        .xmas-garland {
-            position: absolute;
-            /* Ajuste para que salga de la esquina exacta */
-            top: -40px; 
-            right: -65px; 
-            width: 350px; /* Tamaño generoso */
-            height: auto;
-            z-index: 10;
-            pointer-events: none;
-            /* Sombra suave para dar volumen 3D sobre la pared */
-            filter: drop-shadow(-10px 15px 15px rgba(0,0,0,0.15));
-        }
-
-        .quote-wrapper { 
-            overflow: hidden; z-index: 2; position: relative; 
-            max-width: 60%; /* Dejamos sitio a la guirnalda */
-        }
-        
-        .inspiration-text {
-            font-family: 'Inter', serif;
-            font-style: italic;
-            font-size: 36px; color: #333;
-            transition: all 0.8s ease;
-            opacity: 1; transform: translateY(0);
-        }
-
-        .season-tag {
-            font-weight: 900; font-size: 20px; letter-spacing: 2px; text-transform: uppercase;
-            background: #b30000; color: #fff; padding: 10px 25px;
-            border-radius: 4px;
-            /* La movemos a la izquierda para que no la tape la guirnalda */
-            margin-right: 250px; 
-        }
-
-        /* --- 2. MARCO IMAGEN --- */
-        .image-frame {
-            width: 100%; height: 1250px;
-            position: relative; overflow: hidden;
-            border: 1px solid #e0e0e0; 
-            box-shadow: 0 20px 60px rgba(0,0,0,0.05);
-            background-color: #fff;
             z-index: 1;
+            
+            font-family: 'Outfit', sans-serif;
+            color: white;
+            display: flex; flex-direction: column;
         }
 
-        .img-anim-wrapper {
-            width: 100%; height: 100%;
-            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 1; filter: blur(0px); transform: scale(1);
+        /* A partir de aquí, es el diseño "Lego" que funcionaba bien */
+        header, .hero-section, .details-section, .forecast-section {
+            position: relative; padding-left: 60px; padding-right: 60px;
         }
 
-        .main-img {
-            width: 100%; height: 100%;
-            object-fit: cover; display: block;
-            animation: slowPan 25s infinite alternate ease-in-out;
+        /* 1. CABECERA (220px) */
+        header {
+            height: 220px;
+            display: flex; justify-content: space-between; align-items: flex-end;
+            padding-top: 60px;
         }
-        @keyframes slowPan { from { transform: scale(1.0); } to { transform: scale(1.08); } }
+        .title-group h1 { font-size: 80px; font-weight: 800; letter-spacing: 4px; line-height: 1; margin-bottom: 10px; text-transform: uppercase;}
+        .title-group p { font-size: 30px; font-weight: 300; opacity: 0.9; }
+        
+        .clock-group { text-align: right; }
+        .time { font-size: 90px; font-weight: 300; line-height: 1; }
+        .date { font-size: 26px; text-transform: uppercase; margin-top: 10px; font-weight: 500; opacity: 0.8; }
 
-        /* --- 3. INFO GRID --- */
-        .info-grid {
-            height: 350px; margin-top: 40px;
-            display: grid; grid-template-columns: 65% 35%;
-            align-items: center; z-index: 2;
+        /* 2. HÉROE (Flexible) */
+        .hero-section {
+            flex-grow: 1;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
         }
+        .main-icon { font-size: 220px; color: #ffcc00; filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3)); margin-bottom: 20px; }
+        .main-temp { font-size: 320px; font-weight: 800; line-height: 0.9; text-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .main-desc { font-size: 50px; font-weight: 300; margin-top: 20px; text-transform: capitalize; background: rgba(0,0,0,0.3); padding: 10px 40px; border-radius: 50px; backdrop-filter: blur(5px); }
 
-        .text-col {
-            padding-right: 40px; border-right: 1px solid #eee;
-            height: 80%; display: flex; flex-direction: column; justify-content: center;
+        /* 3. DETALLES (250px) */
+        .details-section {
+            height: 250px; display: flex; justify-content: space-between; align-items: center;
         }
-
-        .fluid-text {
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 1; transform: translateY(0); filter: blur(0px);
+        .d-box {
+            background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(15px);
+            width: 30%; height: 180px; border-radius: 30px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            border: 2px solid rgba(255,255,255,0.1);
         }
+        .d-icon { font-size: 50px; margin-bottom: 10px; }
+        .d-val { font-size: 50px; font-weight: 800; }
+        .d-lbl { font-size: 20px; text-transform: uppercase; opacity: 0.8; margin-top: 5px; }
 
-        .product-name {
-            font-family: 'Inter', sans-serif;
-            font-size: 42px; font-weight: 500; 
-            text-transform: uppercase; letter-spacing: 3px;
-            line-height: 1.2; color: #444; margin-bottom: 15px;
-            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+        /* 4. PREVISIÓN (550px) */
+        .forecast-section {
+            height: 550px; padding-bottom: 60px;
+            display: flex; flex-direction: column;
         }
-
-        .product-price {
-            font-size: 130px; font-weight: 900; color: #000;
-            letter-spacing: -4px; line-height: 1;
+        .f-title {
+            font-size: 30px; text-transform: uppercase; letter-spacing: 3px;
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+            padding-bottom: 20px; margin-bottom: 20px; opacity: 0.9;
         }
-
-        .logo-col {
-            display: flex; justify-content: flex-end; align-items: center; padding-left: 40px;
+        .f-list { display: flex; flex-direction: column; justify-content: space-between; height: 100%; }
+        .f-row {
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 40px; background: rgba(0,0,0,0.4);
+            padding: 15px 30px; border-radius: 15px;
         }
-
-        .logo-wrapper { position: relative; display: inline-block; }
-
-        .brand-logo {
-            width: 100%; max-width: 280px; height: auto;
-            object-fit: contain; opacity: 0.9; position: relative; z-index: 1;
-        }
-
-        /* GORRO SANTA */
-        .santa-hat-deco {
-            position: absolute;
-            top: -90px; left: -45px;
-            width: 220px; height: auto;
-            z-index: 5;
-            transform: rotate(-20deg);
-            filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.15));
-        }
-
-        /* TRANSICIONES */
-        .is-hidden { opacity: 0 !important; filter: blur(15px) !important; transform: translateY(30px) !important; }
-        .delay-1 { transition-delay: 0.1s; }
+        .fr-day { width: 35%; font-weight: 500; text-transform: capitalize; }
+        .fr-icon { width: 20%; text-align: center; }
+        .fr-temps { width: 45%; text-align: right; font-weight: 800; }
+        .min-t { font-weight: 300; opacity: 0.7; font-size: 0.8em; margin-left: 15px; }
 
     </style>
 </head>
 <body>
 
-    <div class="header-zone">
-        <img src="guirnalda-top.png" class="xmas-garland" alt="Decoración Navidad">
-        
-        <div class="quote-wrapper">
-            <div class="inspiration-text" id="quote-el">"Regala estilo esta Navidad"</div>
-        </div>
-        
-        <div class="season-tag">XMAS</div>
-    </div>
+    <div class="overlay"></div>
 
-    <div class="image-frame">
-        <div class="img-anim-wrapper" id="img-wrap">
-            <img src="" class="main-img" id="img-el">
-        </div>
-    </div>
-
-    <div class="info-grid">
-        <div class="text-col">
-            <div class="product-name fluid-text" id="name-el">Cargando...</div>
-            <div class="product-price fluid-text delay-1" id="price-el">--</div>
-        </div>
+    <div id="scaler">
         
-        <div class="logo-col">
-            <div class="logo-wrapper">
-                <img src="gorro-santa.png" class="santa-hat-deco" alt="Gorro">
-                <img src="logo.png" class="brand-logo" alt="Bicos de Fío">
+        <header>
+            <div class="title-group">
+                <h1>MEIRA</h1>
+                <p>Lugo, Galicia</p>
+            </div>
+            <div class="clock-group">
+                <div class="time" id="clock-time">00:00</div>
+                <div class="date" id="clock-date">...</div>
+            </div>
+        </header>
+
+        <div class="hero-section">
+            <i class="fas fa-circle-notch fa-spin main-icon" id="main-icon"></i>
+            <div class="main-temp" id="main-temp">--°</div>
+            <div class="main-desc" id="main-desc">Conectando...</div>
+        </div>
+
+        <div class="details-section">
+            <div class="d-box">
+                <i class="fas fa-wind d-icon"></i>
+                <div class="d-val" id="val-wind">--</div>
+                <div class="d-lbl">Viento</div>
+            </div>
+            <div class="d-box">
+                <i class="fas fa-tint d-icon"></i>
+                <div class="d-val" id="val-hum">--%</div>
+                <div class="d-lbl">Humedad</div>
+            </div>
+            <div class="d-box">
+                <i class="fas fa-temperature-high d-icon"></i>
+                <div class="d-val" id="val-feel">--°</div>
+                <div class="d-lbl">Sensación</div>
             </div>
         </div>
-    </div>
 
-    <script>
-        const JSON_URL = 'productos.json';
-        const DURATION = 6000; 
+        <div class="forecast-section">
+            <div class="f-title">Próximos 5 Días</div>
+            <div class="f-list" id="forecast-target">
+                </div>
+        </div>
 
-        const QUOTES = [
-            "Regala estilo esta Navidad",
-            "Moda, Calzado y Complementos",
-            "El detalle perfecto está aquí",
-            "Looks de fiesta para Él y Ella",
-            "Celebra con las mejores marcas",
-            "Tus deseos de moda, concedidos"
-        ];
+    </div> <script>
+        const LAT = 43.2132;
+        const LON = -7.2934;
 
-        let products = [];
-        let currentIndex = 0;
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('clock-time').innerText = now.toLocaleTimeString('es-ES', {hour:'2-digit', minute:'2-digit'});
+            let d = now.toLocaleDateString('es-ES', {weekday:'long', day:'numeric', month:'long'});
+            document.getElementById('clock-date').innerText = d.charAt(0).toUpperCase() + d.slice(1);
+        }
 
-        async function init() {
+        async function initWeather() {
             try {
-                const res = await fetch(JSON_URL + '?t=' + Date.now());
-                products = await res.json();
-                if(products.length > 0) {
-                    renderProduct(0);
-                    setInterval(next, DURATION);
-                }
-            } catch(e) { console.error("Error JSON:", e); }
-        }
+                const url = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto`;
+                const res = await fetch(url);
+                const data = await res.json();
 
-        function renderProduct(index) {
-            const p = products[index];
-            const imgWrap = document.getElementById('img-wrap');
-            const nameEl = document.getElementById('name-el');
-            const priceEl = document.getElementById('price-el');
-            const quoteEl = document.getElementById('quote-el');
-            const imgEl = document.getElementById('img-el');
-
-            imgWrap.classList.add('is-hidden');
-            nameEl.classList.add('is-hidden');
-            priceEl.classList.add('is-hidden');
-            quoteEl.classList.add('is-hidden');
-
-            setTimeout(() => {
-                imgEl.src = p.imagen;
-                nameEl.innerText = p.nombre;
-                priceEl.innerText = p.precio;
+                const cur = data.current;
+                document.getElementById('main-temp').innerText = Math.round(cur.temperature_2m) + "°";
+                document.getElementById('val-wind').innerText = Math.round(cur.wind_speed_10m);
+                document.getElementById('val-hum').innerText = cur.relative_humidity_2m + "%";
+                document.getElementById('val-feel').innerText = Math.round(cur.apparent_temperature) + "°";
+                document.getElementById('main-desc').innerText = getWeatherDesc(cur.weather_code);
                 
-                const randomQuote = QUOTES[Math.floor(Math.random() * QUOTES.length)];
-                quoteEl.innerText = `"${randomQuote}"`;
+                const iconEl = document.getElementById('main-icon');
+                iconEl.className = `fas ${getWeatherIcon(cur.weather_code)} main-icon`;
+                iconEl.style.color = (cur.weather_code <= 1) ? '#ffcc00' : '#ffffff';
 
-                setTimeout(() => {
-                    imgWrap.classList.remove('is-hidden');
-                    nameEl.classList.remove('is-hidden');
-                    priceEl.classList.remove('is-hidden');
-                    quoteEl.classList.remove('is-hidden');
-                }, 100);
-            }, 800); 
+                let html = '';
+                const daily = data.daily;
+                for(let i=1; i<=5; i++) {
+                    const date = new Date(daily.time[i]);
+                    let dayName = date.toLocaleDateString('es-ES', {weekday:'long'});
+                    dayName = dayName.charAt(0).toUpperCase() + dayName.slice(1);
+                    const code = daily.weather_code[i];
+                    const max = Math.round(daily.temperature_2m_max[i]);
+                    const min = Math.round(daily.temperature_2m_min[i]);
+                    let iColor = (code === 0) ? '#ffcc00' : '#eee';
+
+                    html += `
+                    <div class="f-row">
+                        <div class="fr-day">${dayName}</div>
+                        <div class="fr-icon"><i class="fas ${getWeatherIcon(code)}" style="color:${iColor}"></i></div>
+                        <div class="fr-temps">${max}° <span class="min-t">${min}°</span></div>
+                    </div>`;
+                }
+                document.getElementById('forecast-target').innerHTML = html;
+
+            } catch(e) { console.error(e); }
         }
 
-        function next() {
-            currentIndex = (currentIndex + 1) % products.length;
-            renderProduct(currentIndex);
+        function getWeatherIcon(c) {
+            if(c === 0) return 'fa-sun';
+            if(c >= 1 && c <= 3) return 'fa-cloud-sun';
+            if(c >= 45 && c <= 48) return 'fa-smog';
+            if(c >= 51 && c <= 67) return 'fa-cloud-rain';
+            if(c >= 71 && c <= 77) return 'fa-snowflake';
+            if(c >= 80 && c <= 82) return 'fa-umbrella'; 
+            if(c >= 85 && c <= 86) return 'fa-snowflake';
+            if(c >= 95) return 'fa-bolt';
+            return 'fa-cloud';
         }
 
-        init();
+        function getWeatherDesc(c) {
+            const m = {
+                0:"Despejado", 1:"Poco nuboso", 2:"Nublado", 3:"Cubierto",
+                45:"Niebla", 48:"Niebla escarcha",
+                51:"Llovizna", 53:"Llovizna", 55:"Llovizna",
+                61:"Lluvia", 63:"Lluvia", 65:"Lluvia fuerte",
+                71:"Nieve", 73:"Nieve", 75:"Nieve fuerte",
+                80:"Chubascos", 81:"Chubascos", 82:"Chubascos fuertes",
+                85:"Nieve", 86:"Nieve fuerte",
+                95:"Tormenta", 96:"Tormenta con granizo", 99:"Tormenta fuerte"
+            };
+            return m[c] || "Variable";
+        }
+
+        setInterval(updateTime, 1000);
+        updateTime();
+        initWeather();
+        setInterval(initWeather, 900000); 
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
