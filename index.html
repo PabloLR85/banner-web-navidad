@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Navidad Bicos de Fío</title>
+    <title>Navidad Bicos de Fío (Final)</title>
     <style> * { box-sizing: border-box; margin: 0; padding: 0; } </style>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;900&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
@@ -10,54 +10,58 @@
     <style>
         body {
             width: 1080px; height: 1920px; overflow: hidden;
-            background-color: #fff;
-            color: #000;
+            background-color: #fff; color: #000;
             font-family: 'Inter', sans-serif;
             display: flex; flex-direction: column;
             justify-content: space-between;
             padding: 50px 60px;
-            /* Fondo sutil nieve/navidad (opcional) */
-            background-image: radial-gradient(circle at 50% 10%, #fdfbf7 0%, #ffffff 80%);
+            /* Fondo muy sutil */
+            background-image: radial-gradient(circle at 50% 10%, #fffbf2 0%, #ffffff 80%);
         }
 
-        /* --- 1. HEADER CON GUIRNALDA --- */
+        /* --- 1. HEADER --- */
         .header-zone {
             height: 120px;
             display: flex; justify-content: space-between; align-items: center;
             border-bottom: 2px solid #000;
             margin-bottom: 40px;
-            position: relative; /* Clave para la guirnalda */
+            position: relative;
+            z-index: 2;
         }
         
-        /* La Guirnalda */
+        /* --- GUIRNALDA ESQUINA (Ajustada para la foto de las bolas) --- */
         .xmas-garland {
             position: absolute;
-            top: -55px; /* Ajusta esto si quieres que cuelgue más o menos */
-            left: -30px; /* Un poco más ancha que el margen */
-            width: 1080px; /* Ancho total pantalla aprox */
+            /* Ajuste para que salga de la esquina exacta */
+            top: -50px; 
+            right: -60px; 
+            width: 500px; /* Tamaño generoso */
             height: auto;
             z-index: 10;
             pointer-events: none;
-            filter: drop-shadow(0 10px 10px rgba(0,0,0,0.1));
+            /* Sombra suave para dar volumen 3D sobre la pared */
+            filter: drop-shadow(-10px 15px 15px rgba(0,0,0,0.15));
         }
 
-        .quote-wrapper { overflow: hidden; z-index: 2; position: relative; }
+        .quote-wrapper { 
+            overflow: hidden; z-index: 2; position: relative; 
+            max-width: 60%; /* Dejamos sitio a la guirnalda */
+        }
         
         .inspiration-text {
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-size: 32px; color: #333;
+            font-size: 36px; color: #333;
             transition: all 0.8s ease;
             opacity: 1; transform: translateY(0);
         }
 
         .season-tag {
             font-weight: 900; font-size: 20px; letter-spacing: 2px; text-transform: uppercase;
-            background: #b30000; /* ROJO NAVIDAD */
-            color: #fff; padding: 10px 25px;
+            background: #b30000; color: #fff; padding: 10px 25px;
             border-radius: 4px;
-            z-index: 2;
-            box-shadow: 0 5px 15px rgba(179, 0, 0, 0.3);
+            /* La movemos a la izquierda para que no la tape la guirnalda */
+            margin-right: 250px; 
         }
 
         /* --- 2. MARCO IMAGEN --- */
@@ -83,7 +87,7 @@
         }
         @keyframes slowPan { from { transform: scale(1.0); } to { transform: scale(1.08); } }
 
-        /* --- 3. INFO GRID CON GORRO --- */
+        /* --- 3. INFO GRID --- */
         .info-grid {
             height: 350px; margin-top: 40px;
             display: grid; grid-template-columns: 65% 35%;
@@ -95,7 +99,6 @@
             height: 80%; display: flex; flex-direction: column; justify-content: center;
         }
 
-        /* Animaciones fluidas */
         .fluid-text {
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             opacity: 1; transform: translateY(0); filter: blur(0px);
@@ -122,31 +125,21 @@
 
         .brand-logo {
             width: 100%; max-width: 280px; height: auto;
-            object-fit: contain; opacity: 0.9;
-            position: relative; z-index: 1;
+            object-fit: contain; opacity: 0.9; position: relative; z-index: 1;
         }
 
-        /* EL GORRO DE SANTA */
+        /* GORRO SANTA */
         .santa-hat-deco {
             position: absolute;
-            /* --- AJUSTA ESTOS VALORES SI NO ENCAJA EN TU LOGO --- */
-            top: -35px;  /* Mueve arriba/abajo */
-            left: -25px; /* Mueve izq/der */
-            width: 80px; /* Tamaño */
-            /* ---------------------------------------------------- */
-            height: auto;
+            top: -55px; left: -45px;
+            width: 160px; height: auto;
             z-index: 5;
             transform: rotate(-20deg);
             filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.15));
         }
 
-        /* --- CLASE "INVISIBLE" PARA TRANSICIÓN --- */
-        .is-hidden {
-            opacity: 0 !important;
-            filter: blur(15px) !important;
-            transform: translateY(30px) !important;
-        }
-        
+        /* TRANSICIONES */
+        .is-hidden { opacity: 0 !important; filter: blur(15px) !important; transform: translateY(30px) !important; }
         .delay-1 { transition-delay: 0.1s; }
 
     </style>
@@ -154,12 +147,13 @@
 <body>
 
     <div class="header-zone">
-        <img src="guirnalda-top.png" class="xmas-garland" alt="Decoración">
+        <img src="guirnalda-esquina.png" class="xmas-garland" alt="Decoración Navidad">
         
         <div class="quote-wrapper">
             <div class="inspiration-text" id="quote-el">"Regala estilo esta Navidad"</div>
         </div>
-        <div class="season-tag">XMAS SALE</div>
+        
+        <div class="season-tag">XMAS</div>
     </div>
 
     <div class="image-frame">
@@ -186,7 +180,6 @@
         const JSON_URL = 'productos.json';
         const DURATION = 6000; 
 
-        // FRASES NAVIDEÑAS
         const QUOTES = [
             "Regala estilo esta Navidad",
             "Moda, Calzado y Complementos",
@@ -218,14 +211,12 @@
             const quoteEl = document.getElementById('quote-el');
             const imgEl = document.getElementById('img-el');
 
-            // 1. SALIDA (Blur)
             imgWrap.classList.add('is-hidden');
             nameEl.classList.add('is-hidden');
             priceEl.classList.add('is-hidden');
             quoteEl.classList.add('is-hidden');
 
             setTimeout(() => {
-                // 2. CAMBIAR DATOS
                 imgEl.src = p.imagen;
                 nameEl.innerText = p.nombre;
                 priceEl.innerText = p.precio;
@@ -233,14 +224,12 @@
                 const randomQuote = QUOTES[Math.floor(Math.random() * QUOTES.length)];
                 quoteEl.innerText = `"${randomQuote}"`;
 
-                // 3. ENTRADA (Quitar Blur)
                 setTimeout(() => {
                     imgWrap.classList.remove('is-hidden');
                     nameEl.classList.remove('is-hidden');
                     priceEl.classList.remove('is-hidden');
                     quoteEl.classList.remove('is-hidden');
                 }, 100);
-
             }, 800); 
         }
 
