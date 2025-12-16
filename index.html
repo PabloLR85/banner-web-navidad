@@ -2,55 +2,50 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Navidad Ajuste Fino</title>
+    <title>Navidad Estructura Probada</title>
     <style> * { box-sizing: border-box; margin: 0; padding: 0; } </style>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;900&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
 
     <style>
-        :root {
-            --bg-color: #fff;
-            --accent-red: #b30000;
-        }
-
         body {
-            /* AJUSTE: Usamos 100vh exactos para que no haya scroll ni cortes */
-            width: 100vw;
-            height: 100vh;
+            /* MISMAS MEDIDAS QUE EL BANNER DEL TIEMPO */
+            width: 1080px; 
+            height: 1920px; 
             overflow: hidden;
-            background-color: var(--bg-color);
+            
+            background-color: #fff;
             color: #000;
             font-family: 'Inter', sans-serif;
             
-            display: flex;
+            /* ESTRUCTURA FLEX COLUMNA (IGUAL QUE EL TIEMPO) */
+            display: flex; 
             flex-direction: column;
             
-            /* Márgenes reducidos para aprovechar espacio */
-            padding: 3vh 4vw; 
-            
+            /* Marco exterior */
+            padding: 50px 60px;
             background-image: radial-gradient(circle at 50% 30%, #fffbf2 0%, #ffffff 70%);
         }
 
-        /* --- 1. HEADER (Más compacto) --- */
+        /* --- 1. CABECERA (Altura Fija: 220px) --- */
         .header-zone {
-            height: 10vh; 
-            flex-shrink: 0;
+            height: 220px; /* Igual que el header del tiempo */
+            flex-shrink: 0; /* No permitimos que encoja */
             display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 2px solid #000;
+            border-bottom: 3px solid #000;
             position: relative;
             z-index: 2;
-            margin-bottom: 2vh;
+            margin-bottom: 20px;
         }
         
         .xmas-garland {
             position: absolute;
-            top: -1vh; 
-            right: -4vw; 
-            width: 35vw; /* Reducido un poco */
+            top: -50px; 
+            right: -60px; 
+            width: 500px; /* Tamaño controlado en píxeles */
             height: auto;
             z-index: 10; pointer-events: none;
-            filter: drop-shadow(-5px 5px 10px rgba(0,0,0,0.15));
+            filter: drop-shadow(-10px 15px 15px rgba(0,0,0,0.15));
         }
 
         .quote-wrapper { overflow: hidden; z-index: 2; position: relative; max-width: 60%; }
@@ -58,46 +53,44 @@
         .inspiration-text {
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            /* AJUSTE TAMAÑO TEXTO: Mucho más pequeño */
-            font-size: 2.8vh; 
+            font-size: 45px; /* Tamaño legible */
             color: #333;
             transition: all 0.8s ease; opacity: 1; transform: translateY(0);
         }
 
         .season-tag {
-            font-weight: 900; font-size: 1.8vh; 
-            letter-spacing: 2px; text-transform: uppercase;
-            background: var(--accent-red); color: #fff; 
-            padding: 0.8vh 1.5vw;
-            border-radius: 4px; 
-            margin-right: 18vw; 
+            font-weight: 900; font-size: 24px; letter-spacing: 2px; text-transform: uppercase;
+            background: #b30000; color: #fff; padding: 15px 35px;
+            border-radius: 6px; 
+            margin-right: 250px; /* Espacio para la guirnalda */
         }
 
-        /* --- 2. ZONA IMAGEN (Flexible pero controlada) --- */
+        /* --- 2. ZONA IMAGEN (Flexible: Ocupa lo que sobra) --- */
         .image-section-container {
-            flex-grow: 1; /* Ocupa el espacio sobrante */
+            flex-grow: 1; /* Esto es lo que hace que encaje perfecto */
             width: 100%;
+            position: relative;
+            
+            /* Decoración del contenedor */
             background-color: #f9f6f0;
-            box-shadow: inset 0 0 40px rgba(0,0,0,0.03);
             border: 1px solid #eee;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.03);
             
-            margin-bottom: 2vh;
-            
-            /* Centrado perfecto */
+            /* Centrado de la imagen interior */
             display: flex; justify-content: center; align-items: center;
-            padding: 3vh; 
+            padding: 60px; /* Margen interior para que la foto no toque los bordes */
+            margin-bottom: 30px;
         }
 
         .image-frame {
-            /* La imagen se adaptará al alto disponible manteniendo proporción */
+            /* La imagen llenará el contenedor respetando el padding */
+            width: 100%; 
             height: 100%; 
-            width: auto;
-            /* Asegura que no se salga por los lados si la pantalla es estrecha */
-            max-width: 100%; 
-            
             position: relative; overflow: hidden;
-            border: 1.5vh solid #ffffff; /* Marco blanco proporcional */
-            box-shadow: 0 1vh 3vh rgba(0,0,0,0.15);
+            
+            /* Estilo Foto Enmarcada */
+            border: 20px solid #ffffff; 
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
             background-color: #fff; z-index: 1;
         }
 
@@ -114,71 +107,63 @@
         }
         @keyframes slowPan { from { transform: scale(1.0); } to { transform: scale(1.05); } }
 
-        /* --- 3. FOOTER (Textos corregidos) --- */
+        /* --- 3. PIE DE PÁGINA (Altura Fija: 350px) --- */
         .info-grid {
-            height: 14vh; /* Altura fija contenida */
+            height: 350px; /* Altura fija para estabilidad */
             flex-shrink: 0;
             display: grid; grid-template-columns: 60% 40%;
             align-items: center; z-index: 2;
-            border-top: 1px solid #eee;
-            padding-top: 2vh;
+            border-top: 2px solid #eee;
+            padding-top: 30px;
         }
 
         .text-col {
-            padding-right: 2vw;
-            border-right: 1px solid #eee;
+            padding-right: 40px;
+            border-right: 2px solid #eee;
             height: 80%; display: flex; flex-direction: column; justify-content: center;
         }
 
         .product-name {
             font-family: 'Inter', sans-serif;
-            /* AJUSTE TAMAÑO: Reducido para que no grite */
-            font-size: 2.2vh; 
+            font-size: 40px; /* Tamaño controlado */
             font-weight: 500; text-transform: uppercase; letter-spacing: 2px;
-            line-height: 1.3; color: #444; margin-bottom: 0.5vh;
+            line-height: 1.2; color: #444; margin-bottom: 10px;
             display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
         }
 
         .product-price {
-            /* AJUSTE TAMAÑO: Reducido significativamente */
-            font-size: 5.5vh; 
+            font-size: 110px; /* Grande y claro */
             font-weight: 900; color: #000;
-            letter-spacing: -2px; line-height: 1;
+            letter-spacing: -3px; line-height: 1;
         }
 
         .logo-col {
-            display: flex; justify-content: flex-end; align-items: center; padding-left: 2vw;
+            display: flex; justify-content: flex-end; align-items: center; padding-left: 40px;
             height: 100%;
         }
 
-        /* --- NUEVO SISTEMA DE POSICIONAMIENTO DEL GORRO --- */
-        /* Creamos un contenedor relativo solo para logo y gorro */
+        /* --- BLOQUE LOGO + GORRO (Controlado) --- */
         .logo-wrapper { 
             position: relative; 
             display: inline-block; 
-            height: 70%; /* Altura máxima respecto a la columna */
+            height: 180px; /* Altura fija para el logo */
         }
 
         .brand-logo {
-            height: 100%; /* El logo define el tamaño del wrapper */
-            width: auto; 
-            object-fit: contain; opacity: 0.9; 
-            display: block;
+            height: 100%; width: auto; 
+            object-fit: contain; opacity: 0.9; display: block;
         }
 
         .santa-hat-deco {
             position: absolute;
-            /* Usamos PORCENTAJES. El 0,0 es la esquina superior izq del logo */
-            top: -25%;  /* Sube un 25% de la altura del logo */
-            left: -15%; /* Se mueve a la izq un 15% del ancho del logo */
-            
-            /* El gorro será el 50% del ancho del logo */
-            width: 50%; 
+            /* Ajustado para un logo de altura 180px */
+            top: -45px; 
+            left: -35px;
+            width: 120px; /* Tamaño fijo en píxeles */
             height: auto;
-            
             z-index: 5;
-            transform: rotate(-15deg);
-            filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.15));
+            transform: rotate(-20deg);
+            filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.15));
         }
 
         /* ANIMACIONES */
@@ -186,7 +171,7 @@
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             opacity: 1; transform: translateY(0); filter: blur(0px);
         }
-        .is-hidden { opacity: 0 !important; filter: blur(10px) !important; transform: translateY(20px) !important; }
+        .is-hidden { opacity: 0 !important; filter: blur(15px) !important; transform: translateY(30px) !important; }
         .delay-1 { transition-delay: 0.1s; }
 
     </style>
@@ -258,12 +243,14 @@
             const quoteEl = document.getElementById('quote-el');
             const imgEl = document.getElementById('img-el');
 
+            // Salida
             imgWrap.classList.add('is-hidden');
             nameEl.classList.add('is-hidden');
             priceEl.classList.add('is-hidden');
             quoteEl.classList.add('is-hidden');
 
             setTimeout(() => {
+                // Cambiar Datos
                 imgEl.src = p.imagen;
                 nameEl.innerText = p.nombre;
                 priceEl.innerText = p.precio;
@@ -271,6 +258,7 @@
                 const randomQuote = QUOTES[Math.floor(Math.random() * QUOTES.length)];
                 quoteEl.innerText = `"${randomQuote}"`;
 
+                // Entrada
                 setTimeout(() => {
                     imgWrap.classList.remove('is-hidden');
                     nameEl.classList.remove('is-hidden');
