@@ -2,176 +2,164 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Navidad Estructura Probada</title>
+    <title>Navidad Final V6</title>
     <style> * { box-sizing: border-box; margin: 0; padding: 0; } </style>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;900&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
 
     <style>
         body {
-            /* MISMAS MEDIDAS QUE EL BANNER DEL TIEMPO */
+            /* DIMENSIONES EXACTAS */
             width: 1080px; 
             height: 1920px; 
-            overflow: hidden;
+            overflow: hidden; /* Cortar lo que sobre, pero calcularemos para que no sobre */
             
             background-color: #fff;
             color: #000;
             font-family: 'Inter', sans-serif;
             
-            /* ESTRUCTURA FLEX COLUMNA (IGUAL QUE EL TIEMPO) */
             display: flex; 
             flex-direction: column;
             
-            /* Marco exterior */
-            padding: 50px 60px;
+            /* Padding exterior un poco más pequeño para asegurar que todo entre */
+            padding: 40px 50px;
             background-image: radial-gradient(circle at 50% 30%, #fffbf2 0%, #ffffff 70%);
         }
 
-        /* --- 1. CABECERA (Altura Fija: 220px) --- */
+        /* --- 1. CABECERA (Fijo 180px) --- */
         .header-zone {
-            height: 220px; /* Igual que el header del tiempo */
-            flex-shrink: 0; /* No permitimos que encoja */
+            height: 180px; 
+            flex-shrink: 0; /* PROHIBIDO ENCOGER */
             display: flex; justify-content: space-between; align-items: center;
             border-bottom: 3px solid #000;
             position: relative;
             z-index: 2;
-            margin-bottom: 20px;
         }
         
         .xmas-garland {
             position: absolute;
-            top: -50px; 
-            right: -60px; 
-            width: 500px; /* Tamaño controlado en píxeles */
+            top: -30px; right: -50px; 
+            width: 450px; 
             height: auto;
             z-index: 10; pointer-events: none;
-            filter: drop-shadow(-10px 15px 15px rgba(0,0,0,0.15));
         }
 
-        .quote-wrapper { overflow: hidden; z-index: 2; position: relative; max-width: 60%; }
+        .quote-wrapper { overflow: hidden; z-index: 2; position: relative; max-width: 55%; }
         
         .inspiration-text {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Inter', serif;
             font-style: italic;
-            font-size: 45px; /* Tamaño legible */
+            font-size: 40px; 
             color: #333;
-            transition: all 0.8s ease; opacity: 1; transform: translateY(0);
         }
 
         .season-tag {
-            font-weight: 900; font-size: 24px; letter-spacing: 2px; text-transform: uppercase;
-            background: #b30000; color: #fff; padding: 15px 35px;
+            font-weight: 900; font-size: 20px; letter-spacing: 2px; text-transform: uppercase;
+            background: #b30000; color: #fff; padding: 12px 25px;
             border-radius: 6px; 
-            margin-right: 250px; /* Espacio para la guirnalda */
+            margin-right: 220px; 
         }
 
-        /* --- 2. ZONA IMAGEN (Flexible: Ocupa lo que sobra) --- */
+        /* --- 2. ZONA CENTRAL (Flexible pero contenida) --- */
         .image-section-container {
-            flex-grow: 1; /* Esto es lo que hace que encaje perfecto */
+            /* Ocupa el espacio disponible, pero con márgenes controlados */
+            flex: 1; 
             width: 100%;
-            position: relative;
+            margin: 30px 0; /* Separación arriba y abajo */
             
-            /* Decoración del contenedor */
             background-color: #f9f6f0;
             border: 1px solid #eee;
-            box-shadow: inset 0 0 50px rgba(0,0,0,0.03);
             
-            /* Centrado de la imagen interior */
+            /* Importante: Para que la imagen no empuje, usamos overflow hidden aquí */
+            overflow: hidden;
             display: flex; justify-content: center; align-items: center;
-            padding: 60px; /* Margen interior para que la foto no toque los bordes */
-            margin-bottom: 30px;
+            padding: 40px; 
         }
 
         .image-frame {
-            /* La imagen llenará el contenedor respetando el padding */
+            /* La imagen intentará ser lo más grande posible dentro de este espacio */
             width: 100%; 
             height: 100%; 
-            position: relative; overflow: hidden;
             
-            /* Estilo Foto Enmarcada */
+            position: relative; 
             border: 20px solid #ffffff; 
-            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
             background-color: #fff; z-index: 1;
         }
 
         .img-anim-wrapper {
             width: 100%; height: 100%;
-            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 1; filter: blur(0px); transform: scale(1);
         }
 
         .main-img {
             width: 100%; height: 100%;
-            object-fit: cover; display: block;
-            animation: slowPan 25s infinite alternate ease-in-out;
+            /* CONTAIN: Asegura que la foto entera se vea sin recortar y sin empujar */
+            object-fit: contain; 
+            display: block;
         }
-        @keyframes slowPan { from { transform: scale(1.0); } to { transform: scale(1.05); } }
 
-        /* --- 3. PIE DE PÁGINA (Altura Fija: 350px) --- */
+        /* --- 3. PIE DE PÁGINA (Fijo 280px - MÁS COMPACTO) --- */
         .info-grid {
-            height: 350px; /* Altura fija para estabilidad */
-            flex-shrink: 0;
+            height: 280px; /* Altura fija asegurada */
+            flex-shrink: 0; /* PROHIBIDO ENCOGER */
             display: grid; grid-template-columns: 60% 40%;
             align-items: center; z-index: 2;
             border-top: 2px solid #eee;
-            padding-top: 30px;
+            padding-top: 20px;
         }
 
         .text-col {
-            padding-right: 40px;
+            padding-right: 20px;
             border-right: 2px solid #eee;
             height: 80%; display: flex; flex-direction: column; justify-content: center;
         }
 
         .product-name {
             font-family: 'Inter', sans-serif;
-            font-size: 40px; /* Tamaño controlado */
+            font-size: 32px; /* Ajustado para que no ocupe tanto */
             font-weight: 500; text-transform: uppercase; letter-spacing: 2px;
             line-height: 1.2; color: #444; margin-bottom: 10px;
             display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
         }
 
         .product-price {
-            font-size: 110px; /* Grande y claro */
+            font-size: 90px; /* Tamaño seguro */
             font-weight: 900; color: #000;
             letter-spacing: -3px; line-height: 1;
         }
 
         .logo-col {
-            display: flex; justify-content: flex-end; align-items: center; padding-left: 40px;
-            height: 100%;
+            display: flex; justify-content: flex-end; align-items: center; padding-left: 30px;
+            height: 100%; position: relative;
         }
 
-        /* --- BLOQUE LOGO + GORRO (Controlado) --- */
+        /* --- AJUSTE LOGO (El problema principal) --- */
         .logo-wrapper { 
             position: relative; 
             display: inline-block; 
-            height: 180px; /* Altura fija para el logo */
+            /* Altura MÁXIMA de 100px para que no se salga */
+            height: 100px; 
         }
 
         .brand-logo {
             height: 100%; width: auto; 
-            object-fit: contain; opacity: 0.9; display: block;
+            object-fit: contain; opacity: 1; display: block;
         }
 
         .santa-hat-deco {
             position: absolute;
-            /* Ajustado para un logo de altura 180px */
-            top: -45px; 
-            left: -35px;
-            width: 120px; /* Tamaño fijo en píxeles */
+            /* Ajustado al nuevo tamaño del logo */
+            top: -30px; 
+            left: -20px;
+            width: 70px; 
             height: auto;
             z-index: 5;
             transform: rotate(-20deg);
-            filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.15));
         }
 
-        /* ANIMACIONES */
-        .fluid-text {
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 1; transform: translateY(0); filter: blur(0px);
-        }
-        .is-hidden { opacity: 0 !important; filter: blur(15px) !important; transform: translateY(30px) !important; }
+        /* ANIMACIONES (Sutiles) */
+        .fluid-text { transition: all 0.8s ease; opacity: 1; transform: translateY(0); filter: blur(0px); }
+        .is-hidden { opacity: 0 !important; filter: blur(10px) !important; transform: translateY(20px) !important; }
         .delay-1 { transition-delay: 0.1s; }
 
     </style>
@@ -243,14 +231,12 @@
             const quoteEl = document.getElementById('quote-el');
             const imgEl = document.getElementById('img-el');
 
-            // Salida
             imgWrap.classList.add('is-hidden');
             nameEl.classList.add('is-hidden');
             priceEl.classList.add('is-hidden');
             quoteEl.classList.add('is-hidden');
 
             setTimeout(() => {
-                // Cambiar Datos
                 imgEl.src = p.imagen;
                 nameEl.innerText = p.nombre;
                 priceEl.innerText = p.precio;
@@ -258,7 +244,6 @@
                 const randomQuote = QUOTES[Math.floor(Math.random() * QUOTES.length)];
                 quoteEl.innerText = `"${randomQuote}"`;
 
-                // Entrada
                 setTimeout(() => {
                     imgWrap.classList.remove('is-hidden');
                     nameEl.classList.remove('is-hidden');
